@@ -122,7 +122,7 @@ public class Solitaire{
 
 				System.out.println(LeftDeck);
 					
-				for(int l = 0;l<9;l++){
+				for(int l = 0;l<8;l++){
 					System.out.print(ShuffledDeckDisplay.get(l));
 					System.out.println();
 					System.out.println();
@@ -173,7 +173,7 @@ public class Solitaire{
 			}
 
 		
-		if((Table.get(8).get((Table.get(8).size())-1)).getRankValue()==13){
+		if((Table.get(7).get((Table.get(7).size())-1)).getRankValue()==13){
 			win = true;
 			break;
 
