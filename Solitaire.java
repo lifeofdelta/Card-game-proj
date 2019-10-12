@@ -59,12 +59,14 @@ public class Solitaire{
 	System.out.println("Do you want to read the rules of the game   <y> for yes, anthing else for no");
 	String option = in.nextLine();
 	if(option.equals("y")){
-		System.out.println("In Solitaire Klondike, the goal is to create a stack of cards from low to high, in the foundation at the bottom. Each pile can contain only one suit\n");
+		System.out.println("\nIn Solitaire Klondike, the goal is to create a stack of cards from low to high, in the foundation at the bottom. Each pile can contain only one suit\n \n So you can choose to take a card from the discard deck by pressing the letter <d> or you can press <p> to choose from the seven piles \n \n then you can choose a number corresponding to seven decks and then you choose a number in which you want to send the card to \n \n In order to complete the game create a Complete suit on the foundation at the bottom.\n \n NOTE if there are no cards to play re-run the program. Besides that the rules of Solitaire still hold.\n \n");
 
 	}
 	else{
 		;
 	}
+
+	System.out.println("                 -------------LET THE FUN BEGIN----------------               \n \n");
 
 	ArrayList<Card> LeftDeck = setTable.getLeftdeck();
 	System.out.println(LeftDeck);
@@ -95,14 +97,57 @@ public class Solitaire{
 	public static void GameMech(ArrayList<List<Card>> Table, ArrayList<List<String>> ShuffledDeckDisplay,ArrayList<Card> LeftDeck){
 		Scanner in = new Scanner(System.in);
 		boolean win = false;
-		//System.out.println("Do you want to access the Dicard deck or the seven piles, <D> for deck and <P> for piles");
-		//String option = in.nextLine();
+		while(true){
 		while(win != true)
 		{
+		System.out.println("Do you want to access the Dicard deck or the seven piles, <D> for deck and <P> for piles");
+		String option = in.nextLine();
+
+		
+
+
+		if(option.equals("d") || option.equals("D")){
+			Card topCard = LeftDeck.get(LeftDeck.size()-1);
+			System.out.println("Which pile do you want to move it to?");
+			int move = in.nextInt()-1;
+			Card topCard_movepile = Table.get(move).get((Table.get(move).size())-1); //this gets the top card of the pile you want to move to
+			String topCardDisplay = LeftDeck.get(LeftDeck.size()-1).toString();
+
+			if(((topCard.getSuitValue() < 2 && topCard_movepile.getSuitValue() >1) || (topCard.getSuitValue() > 1 && topCard_movepile.getSuitValue() <2) ) && (topCard.getRankValue() == topCard_movepile.getRankValue()-1)  ){
+
+				LeftDeck.remove(LeftDeck.size()-1);
+				Table.get(move).add(topCard);
+				ShuffledDeckDisplay.get(move).add(topCardDisplay);
+
+				System.out.println(LeftDeck);
+					
+				for(int l = 0;l<8;l++){
+					System.out.print(ShuffledDeckDisplay.get(l));
+					System.out.println();
+					System.out.println();
+
+			}
+
+
+
+			break;
+		}
+		else{
+			System.out.println("move is not PERMITTED");
+			
+		}
+	}
+	else{
+
 		System.out.println("\nWhich pile do you want to access?");
-		int access = in.nextInt()-1;					//Minus one so that we dont have to start counting from 0 but 1 instead
-		System.out.println("Which pile do you want to move it to?");
-		int move = in.nextInt()-1;
+			int access = in.nextInt()-1;					//Minus one so that we dont have to start counting from 0 but 1 instead
+			System.out.println("Which pile do you want to move it to?");
+			int move = in.nextInt()-1;
+
+
+		
+		
+		
 		
 		Card topCard = Table.get(access).get((Table.get(access).size())-1); //this gets the top card of the pile you want to access
 		String topCardDisplay = ShuffledDeckDisplay.get(access).get((ShuffledDeckDisplay.get(access).size())-1);
@@ -154,7 +199,7 @@ public class Solitaire{
 				
 				System.out.println(LeftDeck);
 
-				for(int l = 0;l<9;l++){
+				for(int l = 0;l<8;l++){
 					System.out.print(ShuffledDeckDisplay.get(l));
 					System.out.println();
 					System.out.println();
@@ -164,12 +209,6 @@ public class Solitaire{
 			
 			else{
 				System.out.println("MOVE NOT PERMITTED");
-
-				
-				
-
-
-
 			}
 
 		
@@ -180,10 +219,20 @@ public class Solitaire{
 		}
 
 		}
+		
+		//System.out.println("Do you want to access the Dicard deck or the seven piles, <D> for deck and <P> for piles");
+		 option = in.nextLine();
 
 			//System.out.println(Table);
 		}
 	}
+
+	}
+
+		
+			
+	}
+	
 
 
 			
